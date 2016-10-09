@@ -1,0 +1,49 @@
+h1, h4 {
+  text-align: center;
+}
+
+ul {
+  list-style: none;
+  width: 466px;
+  margin: auto;
+}
+
+ul li {
+  display: inline-block;
+  width: 110px;
+  height: 115px;
+  border: 1px solid black;
+
+}
+
+ul li.occupied {
+  border-radius: 50%;
+}
+
+ul li.occupied.player1 {
+  background: red;
+}
+
+ul li.occupied.player2 {
+  background: yellow;
+}
+
+.slots li {
+  border-radius: 50%;
+}
+
+/*.boarder {
+margin-top: 125px;
+}*/
+
+.disk-creator{
+  border: none;
+}
+
+.disk{
+  border-radius: 60px;
+  display: inline-block;
+  width: 110px;
+  height: 115px;
+  border: 1px solid black;
+}
