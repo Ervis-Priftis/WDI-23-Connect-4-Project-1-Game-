@@ -1,25 +1,148 @@
 $(function() {
 
   var $cells = $('.boarder li');
-  var gridWidth = 4;
-  var gridHeight = 4;
+  var gridWidth = 7;
+  var gridHeight = 6;
   var player = "player1";
-  var row1 = [$cells.eq(0), $cells.eq(1), $cells.eq(2), $cells.eq(3)];
-  console.log(row1);
-  var row2 = [$cells.eq(4), $cells.eq(5), $cells.eq(6), $cells.eq(7)];
-  console.log(row2);
-  var row3 = [$cells.eq(8), $cells.eq(9), $cells.eq(10), $cells.eq(11)];
-  console.log(row3);
-  var row4 = [$cells.eq(12), $cells.eq(13), $cells.eq(14), $cells.eq(15)];
-  console.log(row4);
-  // var col1 = [tiles[12], tiles[13], tiles[14], tiles[15] ];
-  // var col2 = [tiles[], tiles[4], tiles[7], tiles[] ];
-  // var col3 = [this.tiles[2], this.tiles[5], this.tiles[8]];
-  // var diag1 = [this.tiles[0], this.tiles[4], this.tiles[8]];
-  // var diag2 = [this.tiles[2], this.tiles[4], this.tiles[6]];
+  var resetBtn = "#resetGame";
+  var scorePlayer1 = 0;
+  var scorePlayer2 = 0;
+  var playing = true;
+
+  function checkCells(indexesToCheck) {
+    var $cellsToCheck = indexesToCheck.map(function(index) {
+      return $cells.eq(index);
+    });
+
+    return $cellsToCheck.every(function($cell) {
+      return $cell.hasClass(player);
+    });
+  }
+
+  function checkForWin() {
+    // check rows
+    var rowWin =
+    //check the combination inrow 35 -->
+    checkCells([35,36,37,38]) || checkCells([36,37,38,39]) || checkCells([37,38,39,40]) || checkCells([38,39,40,41]) ||
+    // --> 41 and backword
+
+    //check the combination inrow 28
+    checkCells([28,29,30,31]) || checkCells([29,30,31,32]) || checkCells([30,31,32,33]) || checkCells([31,32,33,34]) ||
+    // --> 41 and backword
+
+    //check the combination inrow 21
+    checkCells([21,22,23,24]) || checkCells([22,23,24,25]) || checkCells([23,24,25,26]) || checkCells([24,25,26,27]) ||
+    // --> 27 and backword
+
+    //check the combination inrow 14
+    checkCells([14,15,16,17]) || checkCells([15,16,17,18]) || checkCells([16,17,18,19]) || checkCells([17,18,19,20]) ||
+    // --> 20 and backword
+
+    //check the combination inrow 7
+    checkCells([7,8,9,10]) || checkCells([8,9,10,11]) || checkCells([9,10,11,12]) || checkCells([10,11,12,13])||
+    // --> 13 and backword
+
+    //check the combination inrow 0
+    checkCells([0,1,2,3]) || checkCells([1,2,3,4]) || checkCells([2,3,4,5]) || checkCells([3,4,5,6]);
+    // --> 6 and backword
+
+    // check columns
+    var colWin =
+
+    //check the combination incol 35 -->
+    checkCells([35,28,21,14]) || checkCells([28,21,14,7]) || checkCells([21,14,7,0]) ||
+    // --> 1 and backword
+
+    //check the combination incol 36
+    checkCells([36,29,22,15]) || checkCells([29,22,15,8]) || checkCells([22,15,8,1]) ||
+    // --> 1 and backword
+
+    //check the combination incol 37
+    checkCells([37,30,23,16]) || checkCells([30,23,16,9]) || checkCells([23,16,9,2]) ||
+    // --> 2 and backword
+
+    //check the combination incol 38
+    checkCells([38,31,24,17]) || checkCells([31,24,17,10]) || checkCells([24,17,10,3]) ||
+    // --> 3 and backword
+
+    //check the combination incol 39
+    checkCells([39,32,25,18]) || checkCells([32,25,18,11]) || checkCells([25,18,11,4]) ||
+    // --> 4 and backword
+
+    //check the combination incol 40
+    checkCells([40,33,26,19]) || checkCells([33,26,19,12]) || checkCells([26,19,12,5]) ||
+    // --> 5 and backword
+
+    //check the combination incol 41
+    checkCells([41,34,27,20]) || checkCells([34,27,20,13]) || checkCells([27,20,13,6]);
+    // --> 6 and backword
+
+    // check diags
+    var diagWin =
+
+    //check diags Left -> Right
+
+    //check the combination indiags 21
+    checkCells([21,15,9,3]) ||
+    // --> 3 and backword
+
+    //check the combination indiags 28
+    checkCells([28,22,16,10]) || checkCells([22,16,10,4]) ||
+    //check --> 4 and backword
+
+    //check the combination indiags 35
+    checkCells([35,29,23,17]) || checkCells([29,23,17,11]) || checkCells([23,17,11,5]) ||
+    //check --> 5 and backword
+
+    //check the combination indiags 36
+    checkCells([36,30,24,18]) || checkCells([30,24,18,6]) || checkCells([24,18,12,6]) ||
+    //check --> 6 and backword
+
+    //check the combination indiags 37
+    checkCells([37,31,25,19]) || checkCells([31,25,19,13]) ||
+    //check --> 13 and backword
+
+    //check the combination indiags 38
+    checkCells([38,31,26,20]) ||
+    //check --> 20 and backword
+
+    //check diags Right -> Left
+    //check the combination indiags 38
+    checkCells([38,30,22,14]) ||
+    //check --> 14 and backword
+
+    //check the combination indiags 39
+    checkCells([39,31,23,15]) || checkCells([31,23,15,7]) ||
+    //check --> 7 and backword
+
+    //check the combination indiags 40
+    checkCells([40,32,24,16]) || checkCells([32,24,16,8]) || checkCells([24,16,8,0]) ||
+    //check --> 0 and backword
+
+    //check the combination indiags 41
+    checkCells([41,33,25,17]) || checkCells([33,25,17,9]) || checkCells([25,17,9,1]) ||
+    //check --> 1 and backword
+
+    //check the combination indiags 34
+    checkCells([34,26,18,10]) || checkCells([26,18,10,2]) ||
+    //check --> 2 and backword
+
+    //check the combination indiags 27
+    checkCells([27,19,11,3]);
+    //check --> 3 and backword
+
+    return rowWin || colWin || diagWin;
+  }
+
+  $('#resetGame').on('click', function() {
+    $cells.removeClass('occupied player1 player2');
+  });
 
 
   $('.slots li').on('click', function() {
+
+    if(!playing) return;
+
     var colIndex = $(this).index();
     var currentIndex = colIndex + (gridWidth * (gridHeight-1));
     var $currentCell = $cells.eq(currentIndex);
@@ -29,13 +152,23 @@ $(function() {
       $currentCell = $cells.eq(currentIndex);
     }
 
-    console.log($currentCell);
     if($currentCell.length === 1) {
       $currentCell.addClass('occupied').addClass(player);
-      player = (player === "player1") ? "player2" : "player1";
+      console.log(checkForWin());
+
+      if(checkForWin()){
+        // player has won -- do something...
+        if (player === "player1") scorePlayer1++;
+        if (player === "player2") scorePlayer2++;
+
+        // update the score on the page
+        // display who has won
+        // ask if they want to play again? --> reset board
+
+        playing = false;
+      }else {
+        player = (player === "player1") ? "player2" : "player1";
+      }
     }
-
-
-
   });
 });
