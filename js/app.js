@@ -136,6 +136,9 @@ $(function() {
 
   $('#resetGame').on('click', function() {
     $cells.removeClass('occupied player1 player2');
+    playing = true;
+    $("#winner").text("Result");
+    $('.slots').removeClass('yellow');
   });
 
 
@@ -146,6 +149,7 @@ $(function() {
     var colIndex = $(this).index();
     var currentIndex = colIndex + (gridWidth * (gridHeight-1));
     var $currentCell = $cells.eq(currentIndex);
+    $('.slots').toggleClass('yellow');
 
     while($currentCell.hasClass('occupied') && $currentCell.length > 0) {
       currentIndex -= gridWidth;
@@ -154,15 +158,21 @@ $(function() {
 
     if($currentCell.length === 1) {
       $currentCell.addClass('occupied').addClass(player);
-      console.log(checkForWin());
-
+      // console.log(checkForWin());
+      if ($("li.occupied").length === 42) {
+        $("#winner").text("Is a Draw..");
+      }
       if(checkForWin()){
-        // player has won -- do something...
-        if (player === "player1") scorePlayer1++;
-        if (player === "player2") scorePlayer2++;
-
-        // update the score on the page
-        // display who has won
+        if (player === "player1") {
+          $("#winner").text("Player 1 " + "has won!");
+          scorePlayer1++;
+          $("#player1score").text(scorePlayer1);
+        }
+        if (player === "player2") {
+          $("#winner").text("Player 2 " + "has won!");
+          scorePlayer2++;
+          $("#player2score").text(scorePlayer2);
+        }
         // ask if they want to play again? --> reset board
 
         playing = false;

@@ -1,19 +1,26 @@
+body {
+  font-family: 'Space Mono', monospace;
+}
 h1, h4 {
   text-align: center;
 }
 
 ul {
   list-style: none;
-  width: 466px;
+  width: 492px;
   margin: auto;
 }
+
+/*.boarder{
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}*/
 
 ul li {
   display: inline-block;
   width: 60px;
   height: 60px;
   border: 1px solid black;
-
 }
 
 ul li.occupied {
@@ -21,29 +28,66 @@ ul li.occupied {
 }
 
 ul li.occupied.player1 {
-  background: red;
+  background: #000000;
 }
 
 ul li.occupied.player2 {
-  background: yellow;
+  background: #A9A9A9;
+}
+
+.slots {
+  clear: both;
 }
 
 .slots li {
   border-radius: 50%;
+  border-color: transparent;
 }
 
-/*.boarder {
-margin-top: 125px;
-}*/
-
-.disk-creator{
-  border: none;
+.slots li:hover {
+  border-color: black;
+  background-color: #000000;
 }
 
-.disk{
-  border-radius: 60px;
-  display: inline-block;
-  width: 110px;
-  height: 115px;
-  border: 1px solid black;
+.slots.yellow li:hover {
+  background-color: #A9A9A9;
+}
+
+h1 {
+  font-size: 100px;
+  margin-top: 30px;
+  margin-bottom: 60px;
+  font-weight: bold;
+}
+
+h2.player_1 {
+  float: left;
+  font-size: xx-large;
+  margin-left: 75px;
+}
+
+h2.player_2 {
+  float: right;
+  font-size: xx-large;
+  margin-right: 75px;
+}
+
+h2.winner {
+  text-align: center;
+  margin-top: 22px;
+  font-size: 30px;
+}
+
+div.reset_btn {
+  text-align: center;
+  margin-top: 15px;
+}
+
+div.reset_btn button {
+  font-size: 20px;
+  border-radius: 7px;
+  color: white;
+  background-color: black;
+  outline: none;
+  font-family: 'Space Mono', monospace;
 }

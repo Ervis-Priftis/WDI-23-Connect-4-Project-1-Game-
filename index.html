@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Four in a row</title>
+  <link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
   <link rel="stylesheet" href="css/reset.css" media="screen" title="no title">
   <link rel="stylesheet" href="css/style.css" media="screen" title="no title">
 
@@ -12,9 +13,12 @@
 <body>
   <div class="container">
     <div id="header">
-      <h1>Four in row</h1>
-      <!-- <h4>Try to beat me</h4> -->
+      <h1>Connect Four</h1>
     </div>
+
+    <h2 class="player_1">Player 1: <span id="player1score">0</span></h2>
+    <h2 class="player_2">Player 2: <span id="player2score">0</span></h2>
+
     <ul class="slots">
       <li></li>
       <li></li>
@@ -24,52 +28,55 @@
       <li></li>
       <li></li>
     </ul>
-      <ul class="boarder">
-          <li>0</li>
-          <li>1</li>
-          <li>2</li>
-          <li>3</li>
-          <li>4</li>
-          <li>5</li>
-          <li>6</li>
-          <li>7</li>
-          <li>8</li>
-          <li>9</li>
-          <li>10</li>
-          <li>11</li>
-          <li>12</li>
-          <li>13</li>
-          <li>14</li>
-          <li>15</li>
-          <li>16</li>
-          <li>17</li>
-          <li>18</li>
-          <li>19</li>
-          <li>20</li>
-          <li>21</li>
-          <li>22</li>
-          <li>23</li>
-          <li>24</li>
-          <li>25</li>
-          <li>26</li>
-          <li>27</li>
-          <li>28</li>
-          <li>29</li>
-          <li>30</li>
-          <li>31</li>
-          <li>32</li>
-          <li>33</li>
-          <li>34</li>
-          <li>35</li>
-          <li>36</li>
-          <li>37</li>
-          <li>38</li>
-          <li>39</li>
-          <li>40</li>
-          <li>41</li>
-      </ul>
-    </div>
-    <p id="winner"></p>
+
+    <ul class="boarder">
+      <li>0</li>
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+      <li>6</li>
+      <li>7</li>
+      <li>8</li>
+      <li>9</li>
+      <li>10</li>
+      <li>11</li>
+      <li>12</li>
+      <li>13</li>
+      <li>14</li>
+      <li>15</li>
+      <li>16</li>
+      <li>17</li>
+      <li>18</li>
+      <li>19</li>
+      <li>20</li>
+      <li>21</li>
+      <li>22</li>
+      <li>23</li>
+      <li>24</li>
+      <li>25</li>
+      <li>26</li>
+      <li>27</li>
+      <li>28</li>
+      <li>29</li>
+      <li>30</li>
+      <li>31</li>
+      <li>32</li>
+      <li>33</li>
+      <li>34</li>
+      <li>35</li>
+      <li>36</li>
+      <li>37</li>
+      <li>38</li>
+      <li>39</li>
+      <li>40</li>
+      <li>41</li>
+    </ul>
+  </div>
+  <h2 class="winner" id="winner">Result</h2>
+  <div class="reset_btn">
     <button id="resetGame">Reset</button>
+  </div>
 </body>
 </html>
