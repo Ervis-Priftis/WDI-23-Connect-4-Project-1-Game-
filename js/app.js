@@ -4,10 +4,15 @@ $(function() {
   var gridWidth = 7;
   var gridHeight = 6;
   var player = "player1";
-  var resetBtn = "#resetGame";
+  var $resetBtn = $("#resetGame");
   var scorePlayer1 = 0;
   var scorePlayer2 = 0;
   var playing = true;
+  var $winner = $("#winner");
+  var $slots = $('.slots');
+  var $player1score = $("#player1score");
+  var $player2score = $("#player2score");
+
 
   function checkCells(indexesToCheck) {
     var $cellsToCheck = indexesToCheck.map(function(index) {
@@ -134,12 +139,22 @@ $(function() {
     return rowWin || colWin || diagWin;
   }
 
-  $('#resetGame').on('click', function() {
+  function reset() {
     $cells.removeClass('occupied player1 player2');
     playing = true;
-    $("#winner").text("Result");
-    $('.slots').removeClass('yellow');
-  });
+    $winner.text("Result");
+    $slots.removeClass('yellow');
+  }
+
+  function resetAll() {
+    reset();
+    scorePlayer1 = 0;
+    scorePlayer2 = 0;
+    $player1score.text(scorePlayer1);
+    $player2score.text(scorePlayer2);
+  }
+
+  $resetBtn.on('click', resetAll);
 
 
   $('.slots li').on('click', function() {
@@ -149,7 +164,6 @@ $(function() {
     var colIndex = $(this).index();
     var currentIndex = colIndex + (gridWidth * (gridHeight-1));
     var $currentCell = $cells.eq(currentIndex);
-    $('.slots').toggleClass('yellow');
 
     while($currentCell.hasClass('occupied') && $currentCell.length > 0) {
       currentIndex -= gridWidth;
@@ -158,25 +172,24 @@ $(function() {
 
     if($currentCell.length === 1) {
       $currentCell.addClass('occupied').addClass(player);
-      // console.log(checkForWin());
-      if ($("li.occupied").length === 42) {
-        $("#winner").text("Is a Draw..");
-      }
-      if(checkForWin()){
+      $slots.toggleClass('yellow');
+
+      if ($cells.filter('.occupied').length === $cells.length) {
+        $winner.text("Is a Draw..");
+      } else if(checkForWin()){
         if (player === "player1") {
-          $("#winner").text("Player 1 " + "has won!");
+          $winner.text("Player 1 " + "has won!");
           scorePlayer1++;
-          $("#player1score").text(scorePlayer1);
+          $player1score.text(scorePlayer1);
         }
         if (player === "player2") {
-          $("#winner").text("Player 2 " + "has won!");
+          $winner.text("Player 2 " + "has won!");
           scorePlayer2++;
-          $("#player2score").text(scorePlayer2);
+          $player2score.text(scorePlayer2);
         }
-        // ask if they want to play again? --> reset board
-
         playing = false;
-      }else {
+        setTimeout(reset, 1000);
+      } else {
         player = (player === "player1") ? "player2" : "player1";
       }
     }
