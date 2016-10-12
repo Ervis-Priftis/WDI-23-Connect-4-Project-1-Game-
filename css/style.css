@@ -64,7 +64,7 @@ ul li.occupied.player2 {
   background-color: #000000;
 }
 
-.slots.yellow li:hover {
+.slots.grey li:hover {
   background-color: #A9A9A9;
 }
 

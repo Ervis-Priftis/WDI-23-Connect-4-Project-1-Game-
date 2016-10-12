@@ -18,7 +18,6 @@ $(function() {
     var $cellsToCheck = indexesToCheck.map(function(index) {
       return $cells.eq(index);
     });
-
     return $cellsToCheck.every(function($cell) {
       return $cell.hasClass(player);
     });
@@ -140,12 +139,15 @@ $(function() {
   }
 
   function reset() {
+    // reset all the occupied chells from player1 player2
     $cells.removeClass('occupied player1 player2');
+    // sets the players to true so they will be able to play again
     playing = true;
+    player = "player1";
     $winner.text("Result");
-    $slots.removeClass('yellow');
+    $slots.removeClass('grey');
   }
-
+  //reset button for reset the scores
   function resetAll() {
     reset();
     scorePlayer1 = 0;
@@ -156,13 +158,14 @@ $(function() {
 
   $resetBtn.on('click', resetAll);
 
-
   $('.slots li').on('click', function() {
 
     if(!playing) return;
-
+    //colIndex store the index that has been clicked
     var colIndex = $(this).index();
+    //currentIndex store the calculate of gridWidth and gridHeight-1
     var currentIndex = colIndex + (gridWidth * (gridHeight-1));
+
     var $currentCell = $cells.eq(currentIndex);
 
     while($currentCell.hasClass('occupied') && $currentCell.length > 0) {
@@ -172,7 +175,7 @@ $(function() {
 
     if($currentCell.length === 1) {
       $currentCell.addClass('occupied').addClass(player);
-      $slots.toggleClass('yellow');
+      $slots.toggleClass('grey');
 
       if ($cells.filter('.occupied').length === $cells.length) {
         $winner.text("Is a Draw..");
